@@ -1,0 +1,78 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>详情页</title>
+    <link rel="stylesheet" type="text/css" href="static/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="static/css/search.css"/>
+    <link rel="stylesheet" type="text/css" href="static/css/detail.css"/>
+    <link rel="stylesheet" href="static/css/mobi.min.css"/>
+    <script src="static/js/jquery.js"></script>
+    <script src="static/js/highcharts.js"></script>
+    <script src="static/js/exporting.js"></script>
+    <script src="static/js/common.js"></script>
+    <script src="static/js/detail.js"></script>
+</head>
+<body>
+<div id="header_top_search">
+    <div class='header_nav'>
+        <div class='header_inner_left'>
+            <a href='index'>投榜|InvestRank</a>
+        </div>
+        <div id="header_search">
+            <form class="search-form" id="search_form" action="#">
+                <div id="seachInfo">
+                    <div class="search-option-left"><a href="#" id="select_area">按地域</a></div>
+                    <div class="search-option-right"><a href="#" id="select_dev_area">按开发区</a></div>
+                    <input id="searchBtn" class="input-search" name="areaName" type="text" placeholder="请输入地域名,例如:北京,信阳,哈尔滨" th:value="${searchInfo.areaName}"/><button type='button' class='btn search'>搜索</button>
+                </div>
+            </form>
+        </div>
+        <div class="header_inner_right">
+            <div class="widget">
+                <div id="afterLogin">
+                    <img class="afterLogin" id="userIcon" src="static/images/icons1.png.png" />
+                    <div class="afterLogin" id="username" th:text="${session.onlineUser}==null?'':${session.onlineUser.getLoginname()}"></div>
+                    <a href="userInfo.html"><img class="afterLogin" id="settingIcon" src="static/images/setting4.png" width="25px" height="25px"/></a>
+                    <a><img class="afterLogin" id="exitIcon" src="static/images/quit.png"/></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="center">
+    <input type="hidden" th:value="${searchInfo.areaName}" id="keyWord"/>
+    <div class="show-list-num"><p>整体趋势</p></div>
+    <div id="container" class="canvasImg"></div>
+    <div id="container_right" >
+        <div id="indexNum">投资指数&nbsp;:&nbsp;<p style="color:#d74242; margin:0 55% 0 0;width: 20px;float: right;" id="indexNumIn" th:text="${searchInfo.investIndex}"></p></div>
+        <div id="indexRank">全国排名&nbsp;:&nbsp;</div><div class="indexTrend" th:text="${searchInfo.localRank}"></div>
+        <hr class="half-line"/>
+        <div id="newsHeader">热点新闻</div>
+        <div id="newsList">
+            <ul class="news">
+                <li>
+                    <a href="#">中国人赴日买房猛增3倍</a> <a href="#">有炒家整栋整栋整栋整栋整栋买</a>
+                </li>
+                <li>
+                    <a href="#">总局总局：“双十一”明令禁用最低价</a>
+                </li>
+                <li>
+                    <a href="#">[广角镜]总局霞:女神六十</a> <a href="#">拨云见霞光</a>
+                </li>
+                <li>
+                    <a href="#">冠军,被国安逼出冠军</a> <a href="#">冠军青训哪家强</a>
+                </li>
+                <li>
+                    <a href="#">网友调侃库克出柜太恶意</a> <a href="#">多金明星</a>
+                </li>
+                <li>
+                    <a href="#">和苏菲玛索吃早餐</a> <a href="#">全球首架透明飞机</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>

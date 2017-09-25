@@ -1,0 +1,146 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>搜索页</title>
+    <link rel="stylesheet" type="text/css" th:href="@{static/css/index.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{static/css/search.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{static/css/mobi.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{static/css/xcConfirm.css}"/>
+    <script th:src="@{static/js/jquery.js}"></script>
+    <script th:src="@{static/js/xcConfirm.js}"></script>
+    <script th:src="@{static/js/common.js}"></script>
+    <script type="text/javascript" th:src="@{static/js/search.js}"></script>
+</head>
+<body>
+<div id="header_top_search">
+    <div class='header_nav'>
+        <div class='header_inner_left'>
+            <a href='/index'>投榜|InvestRank</a>
+        </div>
+        <div id="header_search">
+            <form class="search-form" id="search_form" action="javascript:void(0);">
+                <div id="seachInfo">
+                    <div class="search-option-left"><a href="#" id="select_area">按地域</a></div>
+                    <div class="search-option-right"><a href="#" id="select_dev_area">按开发区</a></div>
+                    <input id="searchBtn" class="input-search" type="text" name="areaName" placeholder="请输入地域名,例如:北京,信阳,哈尔滨" th:value="${indexList}!=null?${indexList.keyWord}:''"/><button type="button" class='btn search'>搜索</button>
+                </div>
+            </form>
+        </div>
+        <div class="header_inner_right">
+            <div class="widget">
+                <div th:if="${session.onlineUser != null}" id="afterLogin">
+                    <img class="afterLogin" id="userIcon" src="static/images/icons1.png.png" />
+                    <div class="afterLogin" id="username" th:text="${session.onlineUser.getLoginname() }" style="color: #FFFFFF;"></div>
+                    <a href="/userInfo"><img class="afterLogin" id="settingIcon" src="static/images/setting4.png" width="25px" height="25px"/></a>
+                    <a href="#"><img class="afterLogin" id="exitIcon" src="static/images/quit.png"/></a><form id="logout"><input type="hidden" name="areaName" th:value="${indexList}!=null?${indexList.keyWord}:''"/></form>
+                </div>
+                <div th:if="${session.onlineUser == null}" >
+                    <button type="button" class="btn login">登陆</button>
+                    <button type="button" class="btn regist">注册</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="center">
+    <div class="show-list-num" th:if="${indexList != null}" th:text="${'共查询到'+indexList.listSize+'个结果'}"></div>
+    <table class="table" id="showView">
+        <thead>
+        <tr>
+            <th>区域/开发区</th>
+            <th>投资指数</th>
+            <th>全国排名</th>
+            <th>排名变化趋势</th>
+        </tr>
+        </thead>
+        <tbody th:if="${indexList != null}">
+        <tr class="indexColumn" th:each="index:${indexList.resultList}">
+            <td class="indexKeyword"><a th:text="${index.areaName}" th:onclick="'javascript:checkBeforeEnter(\''+${index.areaName}+'\',\''+${index.investIndex}+'\',\''+${index.localRank}+'\');'" th:href="'javascript:void(0);'"></a></td>
+            <td th:text="${index.investIndex}"></td>
+            <td th:text="${index.localRank}"></td>
+            <td class="indexTrend" th:if="${index.rankTrend  == 0}" th:text="----" style="font-family: SimSun-ExtB;font-weight: bold"></td>
+            <td class="indexTrend" th:if="${index.rankTrend  gt 0}" th:text="${index.rankTrend+' ↑'}" style="color:red;font-family: SimSun-ExtB;font-weight: bold"></td>
+            <td class="indexTrend" th:if="${index.rankTrend  lt 0}" th:text="${index.rankTrend+' ↓'}" style="color:greenyellow;font-family: SimSun-ExtB;font-weight: bold"></td>
+        </tr>
+        </tbody>
+        <tbody th:if="${indexList == null}">
+        <tr class="indexColumn">
+            <td colspan="4">结果未被收录,请联系管理员或重新搜索</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div id="loginBox">
+    <div class="login-header">
+        登录<a href="javascript:void(0)" title="关闭窗口" class="close_btn" id="closeBtn">×</a>
+    </div>
+    <hr class="half-line"/>
+    <div class="login-left">
+        <form class="form"  method="post" action="javascript:void(0);" id="loginForm">
+            <input type="text" spellcheck="false" placeholder="手机号或邮箱" name="loginname" id="loginName" onchange="checkUsername()"/>
+            <input type="password" placeholder="密码" name="password" id="password" onchange="checkPassword()"/>
+            <label class="flex-middle" id="rememberme"><input type="checkbox"/>下次自动登陆</label>
+            <span id="loginTips"></span>
+            <input id="login"  class="btn btn-primary" type="submit" value="登录"/>
+        </form>
+    </div>
+</div>
+<div id="loginAsWeixin">
+    <div class="login-header" id="weixinScan2">
+        微信扫一扫<a href="javascript:void(0)" title="关闭窗口" class="close_btn" id="closeBtn4">×</a>
+    </div>
+    <img class="regist-erweima" src="static/images/erweima.jpg" />
+    <div class="othersWay"><a href="#" class="jump-others" id="jump-login">其他方式登陆</a></div>
+</div>
+<div id="registAsWeixin">
+    <div class="regist-header" id="weixinScan">
+        微信扫一扫注册<a href="javascript:void(0)" title="关闭窗口" class="close_btn" id="closeBtn3">×</a>
+    </div>
+    <img class="regist-erweima" src="static/images/erweima.jpg" />
+    <div class="othersWay"><a href="#" class="jump-others" id="jump-regist">其他方式注册</a></div>
+</div>
+<div id="registBox">
+    <div class="regist-header" >
+        注册<a href="javascript:void(0)" title="关闭窗口" class="close_btn" id="closeBtn2">×</a>
+    </div>
+    <div class="regist-phone"><a href="javascript:void(0)" id="choosephone">手机号</a></div>
+    <div class="regist-email"><a href="javascript:void(0)" id="chooseemail">邮箱</a></div>
+    <hr class="half-line"/>
+    <div class="regist-phone-div">
+        <form class="form" id="regist_phone" action="javascript:void(0)">
+            <div class="regist-form">
+                <input type="text"  spellcheck="false" name="loginname" id="phoneUsername" placeholder="手机号"/>
+                <input type="password" name="password" id="phonePassword" placeholder="密码"/>
+                <div class="vercode"><input type="text" spellcheck="false" id="phoneVercode" placeholder="验证码"/></div>
+                <div class="vercode-button"><input class="btn btn-block" id="getVercode" type="button" value="点击获取"/></div>
+                <div style="display: block"><span id="registPhoneTips" style="display: block;"></span></div>
+                <div class="regist-submit" ><input class="btn btn-primary btn-block" id="phoneRegistSubmit" type="submit" value="注册"/></div>
+            </div>
+        </form>
+    </div>
+    <div class="regist-email-div">
+        <form class="form" id="regist_mail" action="javascript:void(0);">
+            <div class="regist-form">
+                <input type="text" name="loginname" id="emailUsername" spellcheck="false" placeholder="邮箱"/>
+                <input type="password" name="password" id="emailPassword" placeholder="密码"/>
+                <div class="vercode"><input type="text" name="mark" id="emailVercode"  spellcheck="false" placeholder="验证码"/>
+                    <span id="registEmailTips" style="display: block;"></span></div>
+                <div class="vercode-button"><a href="javascript:void(0);" id="changeVercode"><img id="imagecode" style="height: 30px;width: 90px;margin-top: 15px" th:src="@{/getVercode}"/></a></div>
+                <input type="hidden" th:value="${session.piccode}" id="piccode"/>
+                <div class="regist-submit" ><input class="btn btn-primary btn-block" type="submit" id="registBtn" value="注册"/></div>
+            </div>
+        </form>
+    </div>
+</div>
+<div id="confirmEmail">
+    <div class="reminder-header">
+        <a href="javascript:void(0)" title="关闭窗口" class="close_btn" id="closeBtn5">×</a>
+    </div>
+    <div class="resultRemind"><p>已发送验证邮件,请进入邮箱继续验证。</p></div>
+    <input id="IKnow" type="button" class="btn btn-primary" value="我知道了"/>
+</div>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+	<meta name="viewport" content="width=device-width,user-scalable=no" />
+    <title>投榜首页</title>
+    <link rel="stylesheet" type="text/css" th:href="@{static/css/index.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{static/css/mobi.min.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{static/css/xcConfirm.css}"/>
+	<script th:src="@{static/js/jquery.js}"></script>
+	<script th:src="@{static/js/xcConfirm.js}"></script>
+	<script th:src="@{static/js/common.js}"></script>
+    <script th:src="@{static/js/index.js}"></script>
+</head>
+<body>
+	<div id="header_top">
+		<div class='header_nav'>
+			<div class='header_inner_left'>
+				<a href='#'>投榜|InvestRank</a>
+			</div>
+			<div class="header_inner_right">
+				<div class="widget">
+					<div th:if="${session.onlineUser != null }" id="afterLogin">
+						<img class="afterLogin" id="userIcon" src="/static/images/user.jpg"/>
+						<div class="afterLogin" id="username" th:text="${session.onlineUser.getLoginname()}"></div>
+						<a href="/userInfo"><img class="afterLogin" id="settingIcon" src="/static/images/setting.jpg"/></a>
+						<a href="#"><img class="afterLogin" id="exitIcon" src="/static/images/exit.jpg"/></a>
+					</div>
+                    <div th:if="${session.onlineUser == null}" id="beforeLogin">
+						<button type="button" class="btn login">登陆</button>
+						<button type="button" class="btn regist">注册</button>
+                    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="center">
+		<form class="search-form" id="search_form" action="javascript:void(0);">
+		<div id="seachInfo">
+			<div class="search-option-left"><a href="#" id="select_area">按地域</a></div>
+			<div class="search-option-right"><a href="#" id="select_dev_area">按开发区</a></div>
+			<input id="searchBtn" class="input-search" type="text" name="areaName" spellcheck="false" placeholder="请输入地域名,例如:北京,信阳,哈尔滨"/><button type="button" class="btn search">搜索</button>
+		</div>
+		</form>
+	</div>
+	<div id="footer">
+		<div id="footer-all">
+			<div id="footer-left">
+				<ul>
+					<li>联系我们</li>
+					<li>邮箱:abcdefg@example.com</li>
+					<li>电话:010-2012225</li>
+					<li>地址:北京市海淀区***街****大厦</li>
+				</ul>
+			</div>
+			<div id="footer-middle">
+				<div class="footer-middle-header">微信公众号</div>
+				<div class="footer-erweima">
+					<img src="/static/images/erweima.jpg" class="foot-img"/>
+					<div class="footer-middle-text">招商引资内参</div>
+				</div>
+			</div>
+			<div id="footer-right">
+				<div class="footer-right-descr1">@2017人民投促数据服务(北京)有限公司</div>
+				<div class="footer-right-descr2">InvestRank.com|京ICP备121554422号</div>
+				<div class="footer-right-descr3">专注投资引参数据服务</div>
+			</div>
+		</div>
+	</div>
+	
+	<!--<div id="loginBox">
+        <div class="login-header">
+            登录<a href="javascript:void(0)" title="关闭窗口" class="close_btn" id="closeBtn">×</a>
+        </div>
+		<hr class="half-line"/>		
+		<div class="login-left">
+			<form class="form" action="#">
+			  <input type="text" placeholder="手机号或邮箱"/>
+			  <input type="email" placeholder="密码"/>
+			  <label class="flex-middle" id="rememberme"><input type="checkbox"/>下次自动登陆</label>
+			  <input id="login" class="btn btn-primary" type="submit" value="登录"/>
+			</form>  
+		</div>
+		<div class="middle-line"></div>
+		<div class="login-right">
+     		<img class="login-erweima" src="./images/erweima.jpg" />
+			<div class="image-undertext">微信扫码登陆</div>
+		</div>
+    </div>-->
+	<div id="loginBox">
+		<div class="login-header">
+			登录<a href="javascript:void(0)" title="关闭窗口" class="close_btn" id="closeBtn">×</a>
+		</div>
+		<hr class="half-line"/>
+		<div class="login-left">
+			<form class="form"  method="post" action="javascript:void(0);" id="loginForm">
+				<input type="text" spellcheck="false" placeholder="手机号或邮箱" name="loginname" id="loginName" onchange="checkUsername()"/>
+				<input type="password" placeholder="密码" name="password" id="password" onchange="checkPassword()"/>
+				<label class="flex-middle" id="rememberme"><input type="checkbox"/>下次自动登陆</label>
+				<span id="loginTips"></span>
+				<input id="login"  class="btn btn-primary" type="submit" value="登录"/>
+			</form>
+		</div>
+	</div>
+	<div id="loginAsWeixin">
+		<div class="login-header" id="weixinScan2">
+			微信扫一扫<a href="javascript:void(0)" title="关闭窗口" class="close_btn" id="closeBtn4">×</a>
+		</div>
+		<img class="regist-erweima" src="/static/images/erweima.jpg" />
+		<div class="othersWay"><a href="#" class="jump-others" id="jump-login">其他方式登陆</a></div>
+	</div>
+	<div id="registAsWeixin">
+		<div class="regist-header" id="weixinScan">
+			微信扫一扫注册<a href="javascript:void(0)" title="关闭窗口" class="close_btn" id="closeBtn3">×</a>
+		</div>
+		<img class="regist-erweima" src="/static/images/erweima.jpg" />
+		<div class="othersWay"><a href="#" class="jump-others" id="jump-regist">其他方式注册</a></div>
+	</div>
+	<div id="registBox">
+        <div class="regist-header" >
+            注册<a href="javascript:void(0)" title="关闭窗口" class="close_btn" id="closeBtn2">×</a>
+        </div>
+		<div class="regist-phone"><a href="javascript:void(0)" id="choosephone">手机号</a></div>
+		<div class="regist-email"><a href="javascript:void(0)" id="chooseemail">邮箱</a></div>
+		<hr class="half-line"/>
+		<div class="regist-phone-div">
+			<form class="form" id="regist_phone" action="javascript:void(0)">
+				<div class="regist-form">
+					<input type="text"  spellcheck="false" name="loginname" id="phoneUsername" placeholder="手机号"/>
+				    <input type="password" name="password" id="phonePassword" placeholder="密码"/>
+					<div class="vercode"><input type="text" spellcheck="false" id="phoneVercode" placeholder="验证码"/></div>
+					<div class="vercode-button"><input class="btn btn-block" id="getVercode" type="button" value="点击获取"/></div>
+                    <div style="display: block"><span id="registPhoneTips" style="display: block;"></span></div>
+					<div class="regist-submit" ><input class="btn btn-primary btn-block" id="phoneRegistSubmit" type="submit" value="注册"/></div>
+				</div>
+			</form>  
+		</div>
+		<div class="regist-email-div">
+			<form class="form" id="regist_mail" action="javascript:void(0);">
+				<div class="regist-form">
+					<input type="text" name="loginname" id="emailUsername" spellcheck="false" placeholder="邮箱"/>
+				    <input type="password" name="password" id="emailPassword" placeholder="密码"/>
+					<div class="vercode"><input type="text" name="mark" id="emailVercode"  spellcheck="false" placeholder="验证码"/>
+                        <span id="registEmailTips" style="display: block;"></span></div>
+					<div class="vercode-button"><a href="javascript:void(0);" id="changeVercode"><img id="imagecode" style="height: 30px;width: 90px;margin-top: 15px" th:src="@{/getVercode}"/></a></div>
+                    <input type="hidden" th:value="${session.piccode}" id="piccode"/>
+					<div class="regist-submit" ><input class="btn btn-primary btn-block" type="submit" id="registBtn" value="注册"/></div>
+				 </div>
+			</form>  
+		</div>
+
+    </div>
+	<div id="confirmEmail">
+		<div class="reminder-header">
+			<a href="javascript:void(0)" title="关闭窗口" class="close_btn" id="closeBtn5">×</a>
+		</div>
+		<div class="resultRemind"><p>已发送验证邮件,请进入邮箱继续验证。</p></div>
+		<input id="IKnow" type="button" class="btn btn-primary" value="我知道了"/>
+	</div>
+    <script type="text/javascript">
+        $(function () {
+            function setBodyWidth(){
+                var barWidthHelper=document.createElement('div');
+                barWidthHelper.style.cssText="overflow:scroll; width:100px; height:100px;";
+                document.body.appendChild(barWidthHelper);
+                var barWidth=barWidthHelper.offsetWidth-barWidthHelper.clientWidth;
+                document.body.removeChild(barWidthHelper);
+                var bodyWidth=window.screen.availWidth-barWidth;
+                return bodyWidth;
+            };
+
+            $(window).resize(function () {
+                $('body').width(setBodyWidth());
+            })
+
+        })
+    </script>
+</body>
+</html>

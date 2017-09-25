@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.peopleinvest.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="cn.peopleinvest.model.User" >
+    <constructor >
+      <idArg column="id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="role" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="is_push" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="join_time" jdbcType="DATE" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, role, is_push, join_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from user
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.peopleinvest.model.User" >
+    insert into user (id, role, is_push, 
+      join_time)
+    values (#{id,jdbcType=VARCHAR}, #{role,jdbcType=VARCHAR}, #{isPush,jdbcType=INTEGER}, 
+      #{joinTime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.peopleinvest.model.User" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="role != null" >
+        role,
+      </if>
+      <if test="isPush != null" >
+        is_push,
+      </if>
+      <if test="joinTime != null" >
+        join_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null" >
+        #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="isPush != null" >
+        #{isPush,jdbcType=INTEGER},
+      </if>
+      <if test="joinTime != null" >
+        #{joinTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.peopleinvest.model.User" >
+    update user
+    <set >
+      <if test="role != null" >
+        role = #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="isPush != null" >
+        is_push = #{isPush,jdbcType=INTEGER},
+      </if>
+      <if test="joinTime != null" >
+        join_time = #{joinTime,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.peopleinvest.model.User" >
+    update user
+    set role = #{role,jdbcType=VARCHAR},
+      is_push = #{isPush,jdbcType=INTEGER},
+      join_time = #{joinTime,jdbcType=DATE}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

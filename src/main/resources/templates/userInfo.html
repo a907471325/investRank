@@ -1,0 +1,166 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>个人信息修改</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/userInfo.css"/>
+    <link rel="stylesheet" href="/static/css/mobi.min.css"/>
+    <link rel="stylesheet" href="/static/css/xcConfirm.css"/>
+
+    <script th:src="@{static/js/jquery.js}"></script>
+    <script th:src="@{static/js/xcConfirm.js}"></script>
+    <script th:src="@{static/js/userInfo.js}"></script>
+</head>
+<body>
+<div id="header_top">
+    <div class='header_nav'>
+        <div class='header_inner_left'>
+            <a href='index.html'>投榜|InvestRank</a>
+        </div>
+        <div class="header_inner_right">
+            <div class="widget">
+                <div th:if="${session.onlineUser != null }" id="afterLogin">
+                    <img class="afterLogin" id="userIcon" src="/static/images/user.jpg"/>
+                    <div class="afterLogin" id="username" th:text="${session.onlineUser.getLoginname()}"></div>
+                    <a href="/userInfo"><img class="afterLogin" id="settingIcon" src="/static/images/setting.jpg"/></a>
+                    <a href="#"><img class="afterLogin" id="exitIcon" src="/static/images/exit.jpg"/></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="center">
+    <div class="center-header-text">账号设置</div>
+    <hr class="center-header-half-line"/>
+    <div class="center-main-body">
+        <div class="center-body-left">
+            <a href="javascript:void(0)"><ul>
+                <li>修改密码</li>
+                <li>绑定手机</li>
+                <li>绑定邮箱</li>
+                <li>绑定微信</li>
+                <li>消息提醒</li>
+            </ul></a>
+        </div>
+    </div>
+    <div class="center-body-midline"></div>
+    <div class="center-body-right">
+        <div id="password_change" class="show-divs">
+            <form class="form" action="javascript:void(0)">
+                <div class="prepwd">原密码:<div class="center-body-renewpsd"><input type="password" id="oriPassword" /></div></div>
+                <div class="newpwd">新密码:<div class="center-body-renewpsd"><input type="password" id="newPassword1st"/></div></div>
+                <div class="newpwd">确认密码:<div class="center-body-renewpsd"><input type="password" id="newPassword2nd" /></div></div>
+                <span id="passwordTips" style="display: block"></span>
+                <input id="submitpwd" class="btn btn-primary" type="button" value="确认更改"/>
+            </form>
+        </div>
+
+        <div id="bind-phone" class="show-divs">
+            <div class="not-bind">
+                <form class="form" action="javascript:void(0)">
+                    <div class="center-body-phone-div">手机号:<div class="center-body-phone"><input type="text" id="addPhone" name="newPhone" /></div></div>
+                    <div class="center-body-phone-vercode">验证码:<input type="text" id="addPhoneVercode" /><span id="addPhoneTips" style="margin-top:10px"></span></div>
+                    <div class="center-body-vercode-button" style="margin-bottom: 40px"><input class="btn " type="button" id="addGetVercode" value="点击获取"/></div>
+                    <input id="submitPhone" class="btn btn-primary" type="button" value="提交"/>
+                </form>
+            </div>
+            <div class="change-bind">
+                <form class="form" action="javascript:void(0)">
+                    <p id="existPhone" class="text-danger">您已绑定手机号</p>
+                    <div class="center-body-phone-div">原手机号:<div class="center-body-phone"><input type="text"/></div></div>
+                    <div class="center-body-phone-div">新手机号:<div class="center-body-phone"><input type="text"/></div></div>
+                    <div class="center-body-phone-vercode" id="phoneVercode">验证码:<input type="text" /></div>
+                    <div class="center-body-vercode-button" id="getVercode"><input class="btn " type="button" value="点击获取"/></div>
+                    <input id="submitNewPhone" class="btn btn-primary" type="button" value="提交"/>
+                </form>
+            </div>
+        </div>
+
+        <div id="bind-email" class="show-divs">
+            <div class="not-bind">
+                <form class="form" action="javascript:void(0)">
+                    <div class="center-body-phone-div">邮箱:<div class="center-body-phone"><input type="text" spellcheck="false" id="setEmail"/></div></div>
+                    <div class="center-body-phone-vercode">验证码:<input type="text" id="emailVercode"/><span id="setEmailTips" style="display: block;margin-top: 10px"></span></div>
+                    <div class="center-body-vercode-button">
+                        <a href="javascript:void(0);" id="changeVercode"><img id="imagecode" style="height: 33px;width: 100px;margin-top: 41px;margin-bottom: 50px" th:src="@{/getVercode}"/></a>
+                    </div>
+
+                    <input id="submitEmail" class="btn btn-primary" type="button" value="绑定"/>
+                </form>
+            </div>
+            <div class="change-bind">
+                <form class="form" action="javascript:void(0)">
+                    <p id="existEmail" class="text-danger">您已绑定邮箱:*******@**.com</p>
+                    <div class="center-body-phone-div">原邮箱号:<div class="center-body-phone"><input type="text" spellcheck="false" id="oriEmail"/></div></div>
+                    <div class="center-body-phone-div">新邮箱号:<div class="center-body-phone"><input type="text" spellcheck="false" id="newEmail"/></div></div>
+                    <span id="setNewEmailTips" style="display: block;margin-top: 10px"></span>
+                    <input id="submitNewEmail" class="btn btn-primary" type="button" value="提交"/>
+                </form>
+            </div>
+        </div>
+
+        <div id="bind-weixin" class="show-divs">
+            <div class="not-bind">
+                <div class="bind-tips">扫描二维码完成绑定</div>
+                <div ><img class="bind-erweima" src="/static/images/erweima.jpg"/></div>
+            </div>
+            <div class="change-bind">
+                <form class="form" action="#">
+                    <div class="binded-tips">您已绑定微信</div>
+                    <div class="currentWx"> <img class="wxLogo" src="/static/images/w6.ico" /><p class="wxName">mobike </p></div>
+                    <div ><input id="submitNewWeixin" class="btn btn-danger" type="button" value="更改绑定"/></div>
+                </form>
+            </div>
+        </div>
+
+        <div id="bind-message" class="show-divs">
+            <input type="checkbox" id="getPushed"/><p>是否接受邮箱信息订阅</p>
+        </div>
+    </div>
+</div>
+<div id="confirmEmail">
+    <div class="reminder-header">
+        <a href="javascript:void(0)" title="关闭窗口" class="close_btn" id="closeBtn5">×</a>
+    </div>
+    <div class="resultRemind"><p>已发送验证邮件,请进入邮箱继续验证。</p></div>
+    <input id="IKnow" type="button" class="btn btn-primary" value="我知道了"/>
+</div>
+<div id="confirmWx">
+    <div class="login-header">
+        使用原微信扫码<a href="javascript:void(0)" title="关闭窗口" class="close_btn" id="closeBtn6">×</a>
+    </div>
+    <img class="regist-erweima" src="/static/images/erweima.jpg" />
+</div>
+<div id="bind-new-wx">
+    <div class="login-header">
+        使用新微信扫码<a href="javascript:void(0)" title="关闭窗口" class="close_btn" id="closeBtn7">×</a>
+    </div>
+    <img class="regist-erweima" src="/static/images/erweima.jpg" />
+</div>
+<input type="hidden" class="checkFlag" th:value="${userInfo.phone}"/>
+<input type="hidden" class="checkFlag" th:value="${userInfo.email}"/>
+<input type="hidden" class="checkFlag" th:value="${userInfo.weixin}"/>
+<input type="hidden" class="checkFlag" id="passwordBack" th:value="${userInfo.password}"/>
+<input type="hidden" class="checkFlag" id="userId" th:value="${session.onlineUser.getUserId()}"/>
+<script type="text/javascript">
+    $(function () {
+        function setBodyWidth(){
+            var barWidthHelper=document.createElement('div');
+            barWidthHelper.style.cssText="overflow:scroll; width:100px; height:100px;";
+            document.body.appendChild(barWidthHelper);
+            var barWidth=barWidthHelper.offsetWidth-barWidthHelper.clientWidth;
+            document.body.removeChild(barWidthHelper);
+            var bodyWidth=window.screen.availWidth-barWidth;
+            return bodyWidth;
+        };
+
+        $(window).resize(function () {
+            $('body').width(setBodyWidth());
+        })
+
+    })
+</script>
+</body>
+</html>

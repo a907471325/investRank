@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.peopleinvest.mapper.LoginuserMapper" >
+  <resultMap id="BaseResultMap" type="cn.peopleinvest.model.Loginuser" >
+    <constructor >
+      <idArg column="type" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <idArg column="user_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="loginname" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="password" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="state" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="remark" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    type, user_id, loginname, password, state, remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.peopleinvest.model.Loginuser" >
+    select
+    <include refid="Base_Column_List" />
+    from loginuser
+    where loginname = #{loginname,jdbcType=VARCHAR}
+    and password = #{password,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="cn.peopleinvest.model.LoginuserKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from loginuser
+    where type = #{type,jdbcType=VARCHAR}
+      and user_id = #{userId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectSelective" resultMap="BaseResultMap" parameterType="cn.peopleinvest.model.Loginuser" >
+    select
+    <include refid="Base_Column_List" />
+    from loginuser
+    <where>
+      <if test="loginname!= null and loginname!= '' ">
+        loginname = #{loginname,jdbcType=VARCHAR}
+      </if>
+      <if test="password!= null and password!= '' ">
+        AND password = #{password,jdbcType=VARCHAR}
+      </if>
+      <if test="state!= null and state!= '' ">
+        AND state = #{state,jdbcType=INTEGER}
+      </if>
+      <if test="remark!= null and remark!= '' ">
+        AND remark = #{remark,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="cn.peopleinvest.model.LoginuserKey" >
+    delete from loginuser
+    where type = #{type,jdbcType=VARCHAR}
+      and user_id = #{userId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert"  parameterType="cn.peopleinvest.model.Loginuser" >
+    insert into loginuser (type, user_id, loginname, 
+      password, state, remark
+      )
+    values (#{type,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{loginname,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.peopleinvest.model.Loginuser" >
+    insert into loginuser
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="loginname != null" >
+        loginname,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="loginname != null" >
+        #{loginname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.peopleinvest.model.Loginuser" >
+    update loginuser
+    <set >
+      <if test="loginname != null" >
+        loginname = #{loginname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where type = #{type,jdbcType=VARCHAR}
+    and user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.peopleinvest.model.Loginuser" >
+    update loginuser
+    set loginname = #{loginname,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR}
+    where type = #{type,jdbcType=VARCHAR}
+      and user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+</mapper>
