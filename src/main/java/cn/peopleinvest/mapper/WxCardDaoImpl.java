@@ -33,6 +33,12 @@ public class WxCardDaoImpl {
         return result;
     }
 
+    public WxCard findObjectById(String id) {
+        Query query=new Query(Criteria.where("id").is(id));
+        WxCard result =  mongoTemplate.findOne(query , WxCard.class);
+        return result;
+    }
+
     /**
      * 更新对象
      * @param user
@@ -65,4 +71,5 @@ public class WxCardDaoImpl {
         Query query=new Query(Criteria.where("id").is(id));
         mongoTemplate.remove(query,WxCard.class);
     }
+
 }

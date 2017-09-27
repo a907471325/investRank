@@ -57,6 +57,13 @@ public class LoginController {
         else return ConstVal.SEND_ERROR;
     }
 
+    /**
+     * 校验验证码
+     * @param code
+     * @param session
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "/checkCode")
     @ResponseBody
     public String checkCode(@RequestParam("code") String code, HttpSession session) throws Exception {
@@ -69,6 +76,11 @@ public class LoginController {
         return ConstVal.SEND_ERROR;
     }
 
+    /**
+     * 校验手机号是否已经被其他用户绑定
+     * @param phone
+     * @return
+     */
     @RequestMapping(value = "/checkPhone")
     @ResponseBody
     public String checkPhone(@RequestParam("phone") String phone){
@@ -79,6 +91,12 @@ public class LoginController {
         return ConstVal.SUCCESS;
     }
 
+    /**
+     * 通过手机号注册
+     * @param loginuser
+     * @param session
+     * @return
+     */
     @PostMapping(value = "/registPhone")
     public String registPhone(Loginuser loginuser,HttpSession session){
 
@@ -98,8 +116,6 @@ public class LoginController {
         session.setAttribute(ConstVal.ONLINE_USER,loginuser);
         return "redirect:index";
     }
-
-
 
 
     @PostMapping(value = "/registConfirm")
@@ -136,6 +152,12 @@ public class LoginController {
         return  ConstVal.SUCCESS;
     }
 
+    /**
+     * 通过邮箱注册
+     * @param email
+     * @param token
+     * @return
+     */
     @GetMapping(value = "/regist")
     public String regist(String email,String token){
 
@@ -152,6 +174,11 @@ public class LoginController {
     }
 
 
+    /**
+     * 注销方法
+     * @param httpSession
+     * @return
+     */
     @GetMapping(value = "/logout")
     public String logout(HttpSession httpSession){
         httpSession.removeAttribute(ConstVal.ONLINE_USER);

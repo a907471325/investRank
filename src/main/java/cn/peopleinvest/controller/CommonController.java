@@ -34,29 +34,51 @@ public class CommonController {
     @Resource
     private InvestIndexService investIndexService;
 
-        @RequestMapping(value = "/search")
-        public String search(Investindex area,ModelMap modelMap,HttpSession session) {
-
-            List<Investindex> indexs = investIndexService.getIndexs(area);
-            if (indexs!= null&& indexs.size() > 0){
-                IndexList indexList = new IndexList(indexs,area.getAreaName());
-                modelMap.addAttribute("indexList",indexList);
-                if (indexs.size() == 1){
-                    return detail(indexs.get(0),modelMap,session);
-                }
+    /**
+     * 根据地区搜索指数
+     * @param area
+     * @param modelMap
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "/search")
+    public String search(Investindex area,ModelMap modelMap,HttpSession session) {
+        List<Investindex> indexs = investIndexService.getIndexs(area);
+        if (indexs!= null&& indexs.size() > 0){
+            IndexList indexList = new IndexList(indexs,area.getAreaName());
+            modelMap.addAttribute("indexList",indexList);
+            if (indexs.size() == 1){
+                return detail(indexs.get(0),modelMap,session);
             }
-            return "search";
         }
+        return "search";
+    }
 
+    /**
+     * 默认跳转到主页
+     * @return
+     */
     @RequestMapping("/")
     public String index() {
         return "index";
     }
+
+    /**
+     * 跳转到主页
+     * @return
+     */
     @RequestMapping(value = "/index")
     public String main() {
             return "index";
         }
 
+    /**
+     * 跳转到页面详情
+     * @param area
+     * @param modelMap
+     * @param session
+     * @return
+     */
     @RequestMapping(value = "/detail")
     public String detail(Investindex area,ModelMap modelMap,HttpSession session) {
         if(session.getAttribute(ConstVal.ONLINE_USER)==null)
@@ -98,6 +120,12 @@ public class CommonController {
     }
 
 
+    /**
+     * 获取验证码
+     * @param request
+     * @param response
+     * @throws IOException
+     */
     @RequestMapping(value = "getVercode")
     public void getVercode(HttpServletRequest request, HttpServletResponse response) throws IOException {
         BufferedImage bi = new BufferedImage(68, 22, BufferedImage.TYPE_INT_RGB);

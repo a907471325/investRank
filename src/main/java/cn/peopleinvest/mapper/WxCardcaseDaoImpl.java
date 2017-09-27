@@ -7,6 +7,8 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class WxCardcaseDaoImpl {
 
@@ -31,6 +33,18 @@ public class WxCardcaseDaoImpl {
         WxCardcase result =  mongoTemplate.findOne(query , WxCardcase.class);
         return result;
     }
+
+    /**
+     * 根据用户名查找符合条件的对象
+     * @param userId
+     * @return
+     */
+    public List<WxCardcase> findObjectByUserId(String userId) {
+        Query query=new Query(Criteria.where("id").regex("^" +userId));
+        List<WxCardcase> result =  mongoTemplate.find(query , WxCardcase.class);
+        return result;
+    }
+
 
     /**
      * 删除对象
