@@ -13,6 +13,7 @@ public class WxOrder {
     private String name;
     private String num;
     private String price;
+    private String showImg;
     private String amount;
     private String buyer;
     private String phone;
@@ -24,7 +25,7 @@ public class WxOrder {
 
     }
 
-    public WxOrder(String orderId, String userId, String code, String dealTime, String name, String num, String price, String amount, String buyer, String phone, String address, String loglat, String status) {
+    public WxOrder(String orderId, String userId, String code, String dealTime, String name, String num, String price, String showImg, String amount, String buyer, String phone, String address, String loglat, String status) {
         this.orderId = orderId;
         this.userId = userId;
         this.code = code;
@@ -32,6 +33,7 @@ public class WxOrder {
         this.name = name;
         this.num = num;
         this.price = price;
+        this.showImg = showImg;
         this.amount = amount;
         this.buyer = buyer;
         this.phone = phone;
@@ -94,6 +96,14 @@ public class WxOrder {
 
     public void setPrice(String price) {
         this.price = price;
+    }
+
+    public String getShowImg() {
+        return showImg;
+    }
+
+    public void setShowImg(String showImg) {
+        this.showImg = showImg;
     }
 
     public String getAmount() {

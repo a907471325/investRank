@@ -1,0 +1,210 @@
+@charset "utf-8";
+body {
+}
+#center {
+    margin: 0;
+    background-image:url("../images/userInfo.jpeg");
+    height:100%;
+}
+
+.center-header-text {
+    font-size:19px;
+    font-family: Arial;
+    color: #FFFFFF;
+    padding-top: 80px;
+    margin-bottom:20px;
+    margin-left: 200px;
+}
+
+.center-header-half-line {
+    width:1150px;
+    margin-left: 100px;
+}
+
+.center-body-left {
+    float: left;
+    color: #666666;
+    width:200px;
+    margin-top: 40px;
+    margin-left: 200px;
+}
+.center-body-left a:hover {
+    text-decoration: none;
+}
+.center-body-left li {
+    color: #f8f8f8;
+    border:1px solid #bbbbbb;
+    font-size:17px;
+    text-align: center;
+    font-family: Arial;
+    padding:7px 0;
+    list-style: none;
+    border-bottom: none;
+}
+.center-body-left li:nth-of-type(1) {
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    color: #FFFFFF;
+    background-color: #2680D9;
+}
+.center-body-left li:nth-child(5) {
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-bottom: 1px solid #bbbbbb;
+}
+.center-body-right {
+    color: #FFFFFF;
+    width: 400px;
+    float: left;
+    margin: 40px 40px 40px 60px;
+}
+.center-body-midline {
+    margin-left:35px;
+    float:left;
+    width: 1px;
+    height: 480px;
+    background: #dddddd;
+}
+.show-divs{
+    display: none;
+}
+.prepwd {
+    margin-bottom:10px;
+}
+.newpwd {
+    margin-bottom: 10px;
+}
+
+#submitpwd {
+    display:block;
+    border: none;
+    width: 100px;
+}
+
+#password_change {
+    display: inline;
+}
+
+#bind-phone,.not-bind,.change-bind {
+    display: none;
+}
+.center-body-phone-div {
+    margin-bottom: 17px;
+}
+.center-body-phone-vercode {
+    margin-top: 4px;
+    float: left;
+    width:260px;
+}
+.center-body-vercode-button {
+    float: right;
+}
+.center-body-vercode-button input {
+
+    margin-top: 43px;
+    width: 130px;
+}
+#submitPhone,#submitNewEmail,#submitNewPhone,#submitEmail {
+    width: 100px;
+    margin-top: 20px;
+}
+#submitEmail{
+    display: block;
+}
+
+#getVercode input {
+    margin-top: 43px;
+}
+#existPhone {
+    margin-bottom:5px;
+}
+#existEmail {
+    margin-bottom:5px;
+}
+#bind-message input {
+    margin-top: 8px;
+}
+#bind-message p {
+    margin-top: 0;
+    margin-right: 180px;
+    float: right;
+    width: 200px;
+}
+.bind-tips{
+    font-family: Arial;
+    font-size: 18px;
+    margin-left: 20px;
+}
+.bind-erweima {
+    height: 150px;
+    width: 150px;
+    margin:40px 20px;
+}
+.currentWx {
+    float: left;
+    width: 150px;
+    margin-top: 20px;
+    margin-right: 200px;
+}
+.wxLogo {
+    float: left;
+    border-radius:13px ;
+    width: 25px;
+    height: 25px;
+}
+
+.wxName {
+    float: left;
+    margin-top:0;
+    margin-left: 10px;
+
+}
+
+#submitNewWeixin {
+
+}
+
+#confirmEmail {
+    position:absolute;
+    left:440px;
+    top:150px;
+    background:white;
+    width:460px;
+    height:300px;
+    z-index:10000;
+    display:none;
+}
+
+.resultRemind {
+    width: 320px;
+    font-family: Arial;
+    font-size: 18px;
+    margin:100px 80px 20px 80px;
+
+}
+#IKnow {
+    width: 300px;
+    margin-left: 80px;
+}
+
+#confirmWx {
+    position:absolute;
+    left:440px;
+    top:150px;
+    background:white;
+    width:360px;
+    height:260px;
+    z-index:10000;
+    display:none;
+}
+#bind-new-wx {
+    position:absolute;
+    left:440px;
+    top:150px;
+    background:white;
+    width:360px;
+    height:260px;
+    z-index:10000;
+    display:none;
+}
+

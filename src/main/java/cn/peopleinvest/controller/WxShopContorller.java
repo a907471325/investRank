@@ -50,7 +50,13 @@ public class WxShopContorller {
             return ObjectMapperWoker.getInstance().writeValueAsString(map);
         }
         return ObjectMapperWoker.getInstance().writeValueAsString(map);
+    }
 
+    @GetMapping(value = "/orderList")
+    public String getOrderList(@RequestHeader(value = "token") String header) throws IOException {
+        Map map = new HashMap();
+        map.put("orderList",wxOrderDao.getOrderByUserId(header));
+        return ObjectMapperWoker.getInstance().writeValueAsString(map);
     }
 
 }
