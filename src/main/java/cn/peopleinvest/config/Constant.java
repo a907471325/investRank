@@ -1,7 +1,7 @@
-package cn.peopleinvest.constant;
+package cn.peopleinvest.config;
 
 /**
- * Created by Hyman on 2017/2/27.
+ * 微信小程序支付所需参数
  */
 public class Constant {
 

@@ -23,6 +23,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
     }
 
+    //https 证书配置
     @Bean
     public EmbeddedServletContainerCustomizer containerCustomizer() {
         return new EmbeddedServletContainerCustomizer() {
@@ -30,7 +31,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
             public void customize(ConfigurableEmbeddedServletContainer container) {
                 Ssl ssl = new Ssl();
                 //Server.jks中包含服务器私钥和证书
-                ssl.setKeyStore("classpath:keystroe.jks");
+                ssl.setKeyStore("classpath:keystore.jks");
                 ssl.setKeyStorePassword("o2x08xf25b7");
                 container.setSsl(ssl);
                 container.setPort(8443);
@@ -57,6 +58,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         return factory;
     }
 
+    //自动将http请求重定向至https
     private Connector createHttpConnector() {
         Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
         connector.setScheme("http");

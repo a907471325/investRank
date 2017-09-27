@@ -1,4 +1,4 @@
-package cn.peopleinvest.util;
+package cn.peopleinvest.config;
 
 public class ConstVal {
     public static final String ONLINE_USER = "onlineUser";

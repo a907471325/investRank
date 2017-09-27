@@ -1,16 +1,13 @@
 package cn.peopleinvest.controller;
 
 import cn.peopleinvest.model.User;
+import cn.peopleinvest.service.MailService;
 import cn.peopleinvest.service.MsgService;
-import cn.peopleinvest.util.ConstVal;
+import cn.peopleinvest.config.ConstVal;
 import cn.peopleinvest.model.Investindex;
 import cn.peopleinvest.model.Loginuser;
-import cn.peopleinvest.service.MailService;
 import cn.peopleinvest.service.UserService;
-import cn.peopleinvest.util.Md5Encrypt;
 import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;

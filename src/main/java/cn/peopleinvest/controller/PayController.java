@@ -2,7 +2,7 @@ package cn.peopleinvest.controller;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import cn.peopleinvest.constant.Constant;
+import cn.peopleinvest.config.Constant;
 import cn.peopleinvest.model.PayInfo;
 import cn.peopleinvest.util.*;
 import org.apache.commons.lang3.StringUtils;

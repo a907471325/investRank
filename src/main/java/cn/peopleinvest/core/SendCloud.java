@@ -7,7 +7,7 @@ import cn.peopleinvest.exception.VoiceException;
 import cn.peopleinvest.model.*;
 import cn.peopleinvest.model.TextContent.ScContentType;
 import cn.peopleinvest.util.Md5Util;
-import cn.peopleinvest.util.ResponseData;
+import cn.peopleinvest.model.ResponseData;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.util.JSONUtils;

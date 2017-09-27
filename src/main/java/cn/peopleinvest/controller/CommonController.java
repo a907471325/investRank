@@ -1,18 +1,14 @@
 package cn.peopleinvest.controller;
 
-import cn.peopleinvest.service.impl.AreaServiceImpl;
-import cn.peopleinvest.util.ConstVal;
-import cn.peopleinvest.model.*;
+import cn.peopleinvest.service.AreaService;
+import cn.peopleinvest.service.InvestIndexService;
 import cn.peopleinvest.service.UserService;
-import cn.peopleinvest.service.impl.InvestIndexServiceImpl;
-import cn.peopleinvest.service.impl.UserServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import cn.peopleinvest.config.ConstVal;
+import cn.peopleinvest.model.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
@@ -30,13 +26,13 @@ public class CommonController {
 
 
     @Resource
-    private UserServiceImpl userService;
+    private UserService userService;
 
     @Resource
-    private AreaServiceImpl areaService;
+    private AreaService areaService;
 
     @Resource
-    private InvestIndexServiceImpl investIndexService;
+    private InvestIndexService investIndexService;
 
         @RequestMapping(value = "/search")
         public String search(Investindex area,ModelMap modelMap,HttpSession session) {

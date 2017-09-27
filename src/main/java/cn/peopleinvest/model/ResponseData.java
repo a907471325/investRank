@@ -1,4 +1,4 @@
-package cn.peopleinvest.util;
+package cn.peopleinvest.model;
 
 import net.sf.json.JSONObject;
 

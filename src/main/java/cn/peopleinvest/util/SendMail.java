@@ -1,5 +1,6 @@
 package cn.peopleinvest.util;
 
+import cn.peopleinvest.model.ResponseData;
 import cn.peopleinvest.model.MailAddressReceiver;
 import cn.peopleinvest.model.MailBody;
 import cn.peopleinvest.model.SendCloudMail;

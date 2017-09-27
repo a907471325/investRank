@@ -5,8 +5,8 @@ import cn.peopleinvest.model.Loginuser;
 import cn.peopleinvest.model.LoginuserKey;
 import cn.peopleinvest.model.UserInfo;
 import cn.peopleinvest.service.MailService;
-import cn.peopleinvest.service.impl.UserServiceImpl;
-import cn.peopleinvest.util.ConstVal;
+import cn.peopleinvest.service.UserService;
+import cn.peopleinvest.config.ConstVal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,9 +21,7 @@ import javax.servlet.http.HttpSession;
 public class UserController {
 
     @Resource
-    private UserServiceImpl userService;
-
-
+    private UserService userService;
 
     @Resource
     private MailService mailService;
