@@ -26,6 +26,13 @@ public class WxCardController {
         return ObjectMapperWoker.getInstance().writeValueAsString(jo);
     }
 
+    @GetMapping(value = "/cardId")
+    public String getCardFromId(@RequestHeader("token") String id) throws IOException {
+        JSONObject jo = new JSONObject();
+        jo.put("cardData",wxCardDao.findObjectById(id));
+        return ObjectMapperWoker.getInstance().writeValueAsString(jo);
+    }
+
     @PostMapping(value = "/card")
     public String addCard(@RequestHeader("token") String token, @RequestBody WxCard data) throws IOException {
         JSONObject jo = new JSONObject();

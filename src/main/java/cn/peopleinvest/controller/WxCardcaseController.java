@@ -56,6 +56,17 @@ public class WxCardcaseController {
            }
        }
        return ObjectMapperWoker.getInstance().writeValueAsString(result);
+    }
 
+    @DeleteMapping(value = "/cardData/{id}")
+    public String getCardCaseData(@RequestHeader("token") String header,@PathVariable String id) throws IOException {
+
+        try{
+            wxCardcaseDao.deleteCardById(header+id);
+        }
+        catch (Exception e){
+            return "failed";
+        }
+        return "success";
     }
 }

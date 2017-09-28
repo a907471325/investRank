@@ -50,8 +50,8 @@ public class WxCardcaseDaoImpl {
      * 删除对象
      * @param id
      */
-    public void deleteCardById(String id,String id2) {
-        Query query=new Query(Criteria.where("id").is(id).and("wxCard").is(id2));
+    public void deleteCardById(String id) {
+        Query query=new Query(Criteria.where("id").is(id));
         mongoTemplate.remove(query,WxCardcase.class);
     }
 }
