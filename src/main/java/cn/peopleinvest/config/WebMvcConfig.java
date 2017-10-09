@@ -31,8 +31,12 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
             public void customize(ConfigurableEmbeddedServletContainer container) {
                 Ssl ssl = new Ssl();
                 //Server.jks中包含服务器私钥和证书
-                ssl.setKeyStore("classpath:keystore.jks");
-                ssl.setKeyStorePassword("o2x08xf25b7");
+                //腾讯云
+//                ssl.setKeyStore("classpath:keystore.jks");
+//                ssl.setKeyStorePassword("o2x08xf25b7");
+                //阿里云
+                ssl.setKeyStore("classpath:ali.jks");
+                ssl.setKeyStorePassword("214288129500874");
                 container.setSsl(ssl);
                 container.setPort(8443);
             }
