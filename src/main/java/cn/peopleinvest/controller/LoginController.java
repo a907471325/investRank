@@ -22,6 +22,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+/**
+ * 投榜网登录控制器
+ */
 @Controller
 public class LoginController {
 
@@ -34,6 +37,12 @@ public class LoginController {
     @Resource
     private MailService mailService;
 
+    /**
+     * 登录
+     * @param loginuser
+     * @param httpServletRequest
+     * @return
+     */
     @PostMapping(value = "/loginCheck")
     @ResponseBody
     public Loginuser login(Loginuser loginuser, HttpServletRequest httpServletRequest){
@@ -46,6 +55,13 @@ public class LoginController {
         return user;
     }
 
+    /**
+     * 手机登录发送短信验证码
+     * @param phone
+     * @param session
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "/sendMsg")
     @ResponseBody
     public String sendSMS(@RequestParam("phone") String phone, HttpSession session) throws Exception {
@@ -77,7 +93,7 @@ public class LoginController {
     }
 
     /**
-     * 校验手机号是否已经被其他用户绑定
+     * 注册手机号时校验手机号是否已经被其他用户绑定
      * @param phone
      * @return
      */
@@ -118,27 +134,38 @@ public class LoginController {
     }
 
 
+    /**
+     * 发起邮箱注册
+     * @param loginuser
+     * @return
+     */
     @PostMapping(value = "/registConfirm")
     @ResponseBody
     public String registConfirm(Loginuser loginuser) {
         Loginuser param = new Loginuser();
         param.setLoginname(loginuser.getLoginname());
         Loginuser existUser = userService.querySelective(param);
+        //已存在当前邮箱注册的用户
         if (existUser != null ){
+            //邮箱已被验证
             if (existUser.getState() == 1){
                 return ConstVal.INPUT;
             }
+            //邮箱未被验证,可继续执行验证
             else {
                    new Thread(()->{
+
                        try {
                            mailService.processregister(existUser);
                        } catch (Throwable throwable) {
                            throwable.printStackTrace();
                        }
+
                    }).start();
 
             }
         }
+        //未被注册过,可以使用
         else {
             new Thread(()->{
                 try {
@@ -153,7 +180,7 @@ public class LoginController {
     }
 
     /**
-     * 通过邮箱注册
+     * 通过邮箱中的链接确认注册
      * @param email
      * @param token
      * @return
@@ -175,7 +202,7 @@ public class LoginController {
 
 
     /**
-     * 注销方法
+     * 注销
      * @param httpSession
      * @return
      */
@@ -185,6 +212,14 @@ public class LoginController {
         return "index";
     }
 
+    /**
+     * 退出登录后也保持当前搜索状态,用户在搜索地区时,
+     * 即使点击注销,当前搜索结果也不会消失
+     * @param investindex
+     * @param httpSession
+     * @param modelMap
+     * @return
+     */
     @GetMapping(value = "/logoutSearch")
     public ModelAndView logoutSearch(Investindex investindex,HttpSession httpSession, ModelMap modelMap){
         httpSession.removeAttribute(ConstVal.ONLINE_USER);

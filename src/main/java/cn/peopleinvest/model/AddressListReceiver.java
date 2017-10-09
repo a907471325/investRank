@@ -1,6 +1,6 @@
 package cn.peopleinvest.model;
 
-import cn.peopleinvest.config.Config;
+import cn.peopleinvest.config.MailConfig;
 import cn.peopleinvest.exception.ReceiverException;
 import org.apache.commons.collections.CollectionUtils;
 
@@ -41,7 +41,7 @@ public class AddressListReceiver implements Receiver {
 	public boolean validate() throws ReceiverException {
 		if (CollectionUtils.isEmpty(invokeNames))
 			throw new ReceiverException("地址列表为空");
-		if (invokeNames.size() > Config.MAX_MAILLIST)
+		if (invokeNames.size() > MailConfig.MAX_MAILLIST)
 			throw new ReceiverException("地址列表超过上限");
 		return true;
 	}

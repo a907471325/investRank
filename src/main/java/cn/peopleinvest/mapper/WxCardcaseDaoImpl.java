@@ -45,7 +45,6 @@ public class WxCardcaseDaoImpl {
         return result;
     }
 
-
     /**
      * 删除对象
      * @param id

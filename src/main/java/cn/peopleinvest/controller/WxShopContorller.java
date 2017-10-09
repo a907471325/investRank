@@ -16,10 +16,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+/**
+ * 微信商城控制器
+ */
 @RestController
 @RequestMapping(value = "/shop")
 public class WxShopContorller {
-
 
     private static Logger logger = Logger.getLogger(WxShopContorller.class);
 
@@ -28,6 +30,12 @@ public class WxShopContorller {
     @Resource
     private WxOrderDaoImpl wxOrderDao;
 
+    /**
+     * 获取商品列表
+     * @param Header
+     * @return
+     * @throws IOException
+     */
     @GetMapping(value = "/itemList")
     public String getItemList(@RequestHeader(value = "token") String Header) throws IOException {
 
@@ -36,6 +44,13 @@ public class WxShopContorller {
         return ObjectMapperWoker.getInstance().writeValueAsString(itemList);
     }
 
+    /**
+     * 处理订单
+     * @param header
+     * @param order
+     * @return
+     * @throws IOException
+     */
     @PostMapping(value = "/deal")
     public String addOrder(@RequestHeader(value = "token") String header,@RequestBody WxOrder order) throws IOException {
         Map map = new HashMap();
@@ -52,6 +67,12 @@ public class WxShopContorller {
         return ObjectMapperWoker.getInstance().writeValueAsString(map);
     }
 
+    /**
+     * 获取订单列表
+     * @param header
+     * @return
+     * @throws IOException
+     */
     @GetMapping(value = "/orderList")
     public String getOrderList(@RequestHeader(value = "token") String header) throws IOException {
         Map map = new HashMap();

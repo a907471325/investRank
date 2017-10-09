@@ -4,9 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-/**
- * Created by Hyman on 2017/2/28.
- */
+
 public class TimeUtils {
 
     //TODO 都未处理输入参数

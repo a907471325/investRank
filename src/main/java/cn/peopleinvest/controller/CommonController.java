@@ -21,6 +21,9 @@ import java.io.IOException;
 import java.util.*;
 import java.util.List;
 
+/**
+ * 投榜网通用控制器
+ */
 @Controller
 public class CommonController {
 
@@ -87,7 +90,11 @@ public class CommonController {
         return "detail";
     }
 
-
+    /**
+     * 返回当地搜索指数
+     * @param areaName
+     * @return
+     */
     @RequestMapping(value = "/reqData")
     @ResponseBody
     public List<Investindex> resustResponse(String areaName) {
@@ -96,12 +103,23 @@ public class CommonController {
         return investIndexService.getResultList(investindex);
     }
 
+    /**
+     * 返回地区列表
+     * @param areaName
+     * @return
+     */
     @RequestMapping(value = "/reqArea")
     @ResponseBody
     public List<Area> reqArea(String areaName) {
         return areaService.queryByPrimarykey(areaName);
     }
 
+    /**
+     * 跳转用户详情页
+     * @param session
+     * @param modelMap
+     * @return
+     */
     @RequestMapping(value = "/userInfo")
     public String userInfo(HttpSession session,ModelMap modelMap){
         Map<String, String> params = new HashMap<>();
@@ -144,10 +162,17 @@ public class CommonController {
             g.drawString(ch[index]+"", (i*15)+3, 18);
             sb.append(ch[index]);
         }
+        //验证码添加至SESSION待验证
         request.getSession().setAttribute("piccode", sb.toString());
         ImageIO.write(bi, "JPG", response.getOutputStream());
     }
 
+    /**
+     * 获取session中的验证码
+     * @param Date
+     * @param session
+     * @return
+     */
     @RequestMapping(value = "getCodeSession")
     @ResponseBody
     public String getCodeSession(String Date,HttpSession session){

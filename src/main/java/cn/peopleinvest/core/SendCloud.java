@@ -1,6 +1,6 @@
 package cn.peopleinvest.core;
 
-import cn.peopleinvest.config.Config;
+import cn.peopleinvest.config.MailConfig;
 import cn.peopleinvest.config.Credential;
 import cn.peopleinvest.exception.SmsException;
 import cn.peopleinvest.exception.VoiceException;
@@ -187,10 +187,10 @@ public class SendCloud {
 	 */
 	public ResponseData sendMail(SendCloudMail mail) throws Throwable {
 		Asserts.notNull(mail, "mail");
-		Asserts.notBlank(Config.api_user, "api_user");
-		Asserts.notBlank(Config.api_key, "api_key");
+		Asserts.notBlank(MailConfig.api_user, "api_user");
+		Asserts.notBlank(MailConfig.api_key, "api_key");
 		mail.validate();
-		Credential credential = new Credential(Config.api_user, Config.api_key);
+		Credential credential = new Credential(MailConfig.api_user, MailConfig.api_key);
 		if (CollectionUtils.isEmpty(mail.getBody().getAttachments())) {
 			return post(credential, mail);
 		} else {
@@ -358,8 +358,7 @@ public class SendCloud {
 
 	/**
 	 * 发送短信
-	 * 
-	 * @param credential
+	 *
 	 * @param sms
 	 * @return
 	 * @throws ClientProtocolException
@@ -368,10 +367,10 @@ public class SendCloud {
 	 */
 	public ResponseData sendSms(SendCloudSms sms) throws ClientProtocolException, IOException, SmsException {
 		Asserts.notNull(sms, "sms");
-		Asserts.notBlank(Config.sms_user, "sms_user");
-		Asserts.notBlank(Config.sms_key, "sms_key");
+		Asserts.notBlank(MailConfig.sms_user, "sms_user");
+		Asserts.notBlank(MailConfig.sms_key, "sms_key");
 		sms.validate();
-		Credential credential = new Credential(Config.sms_user, Config.sms_key);
+		Credential credential = new Credential(MailConfig.sms_user, MailConfig.sms_key);
 		TreeMap<String, String> treeMap = new TreeMap<String, String>();
 		treeMap.put("smsUser", credential.getApiUser());
 		treeMap.put("msgType", sms.getMsgType().toString());
@@ -402,8 +401,7 @@ public class SendCloud {
 
 	/**
 	 * 发送语音
-	 * 
-	 * @param credential
+	 *
 	 * @param voice
 	 * @return
 	 * @throws VoiceException
@@ -412,10 +410,10 @@ public class SendCloud {
 	 */
 	public ResponseData sendVoice(SendCloudVoice voice) throws VoiceException, ParseException, IOException {
 		Asserts.notNull(voice, "voice");
-		Asserts.notBlank(Config.sms_user, "sms_user");
-		Asserts.notBlank(Config.sms_key, "sms_key");
+		Asserts.notBlank(MailConfig.sms_user, "sms_user");
+		Asserts.notBlank(MailConfig.sms_key, "sms_key");
 		voice.validate();
-		Credential credential = new Credential(Config.sms_user, Config.sms_key);
+		Credential credential = new Credential(MailConfig.sms_user, MailConfig.sms_key);
 		TreeMap<String, String> treeMap = new TreeMap<String, String>();
 		treeMap.put("smsUser", credential.getApiUser());
 		treeMap.put("phone", voice.getPhone());

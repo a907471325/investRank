@@ -1,6 +1,6 @@
 package cn.peopleinvest.model;
 
-import cn.peopleinvest.config.Config;
+import cn.peopleinvest.config.MailConfig;
 import cn.peopleinvest.exception.SmsException;
 import net.sf.json.JSONObject;
 import org.apache.commons.collections.CollectionUtils;
@@ -77,7 +77,7 @@ public class SendCloudSms {
 			throw new SmsException("模版为空");
 		if (CollectionUtils.isEmpty(phone))
 			throw new SmsException("收信人为空");
-		if (phone.size() > Config.MAX_RECEIVERS)
+		if (phone.size() > MailConfig.MAX_RECEIVERS)
 			throw new SmsException("收信人超过限制");
 		return true;
 	}

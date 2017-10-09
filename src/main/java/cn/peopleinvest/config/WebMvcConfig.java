@@ -1,4 +1,4 @@
-package cn.peopleinvest.conf;
+package cn.peopleinvest.config;
 
 import org.apache.catalina.Context;
 import org.apache.catalina.connector.Connector;

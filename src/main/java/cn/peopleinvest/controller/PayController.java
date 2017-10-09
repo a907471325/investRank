@@ -18,17 +18,28 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 小程序支付控制器
+ */
 @Controller
 public class PayController {
 
     private static Logger log = Logger.getLogger(PayController.class);
 
+    /**
+     * 预支付,小程序发起支付前调用
+     * @param code 小程序通过微信登陆后返回的参数
+     * @param name 商品名
+     * @param price 商品价格
+     * @param request request
+     * @return prepareId,randomNonceStr
+     */
     @ResponseBody
     @GetMapping(value = "/prepay", produces = "text/html;charset=UTF-8")
     public String prePay(@RequestParam String code, @RequestParam String name, @RequestParam int price, HttpServletRequest request) {
 
         String content = null;
-        Map map = new HashMap();
+        Map<String,String> map = new HashMap<String,String>();
         ObjectMapper mapper = new ObjectMapper();
 
         boolean result = true;
@@ -63,7 +74,7 @@ public class PayController {
         }
 
         try {
-            map.put("result", result);
+            map.put("result", result?"true":"false");
             map.put("info", info);
             content = mapper.writeValueAsString(map);
         } catch (Exception e) {

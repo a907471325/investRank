@@ -1,6 +1,6 @@
 package cn.peopleinvest.model;
 
-import cn.peopleinvest.config.Config;
+import cn.peopleinvest.config.MailConfig;
 import cn.peopleinvest.exception.ReceiverException;
 import org.apache.commons.collections.CollectionUtils;
 
@@ -85,7 +85,7 @@ public class MailAddressReceiver implements Receiver {
 			receivers += cc.size();
 		if (CollectionUtils.isNotEmpty(bcc))
 			receivers += bcc.size();
-		if (receivers > Config.MAX_RECEIVERS)
+		if (receivers > MailConfig.MAX_RECEIVERS)
 			throw new ReceiverException("收件人超出上限");
 		return true;
 	}

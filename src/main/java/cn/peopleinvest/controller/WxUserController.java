@@ -6,7 +6,6 @@ import cn.peopleinvest.util.CommonUtil;
 import cn.peopleinvest.util.ObjectMapperWoker;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.log4j.Logger;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -15,7 +14,10 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@Controller
+/**
+ * 小程序登录控制器
+ */
+@RestController
 public class WxUserController {
 
     @Resource

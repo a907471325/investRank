@@ -1,6 +1,6 @@
 package cn.peopleinvest.model;
 
-import cn.peopleinvest.config.Config;
+import cn.peopleinvest.config.MailConfig;
 import cn.peopleinvest.exception.ContentException;
 import org.apache.commons.lang.StringUtils;
 
@@ -65,7 +65,7 @@ public class TextContent implements Content {
 	public boolean validate() throws ContentException {
 		if (StringUtils.isBlank(text))
 			throw new ContentException("邮件内容为空");
-		if (text.length() > Config.MAX_CONTENT_SIZE)
+		if (text.length() > MailConfig.MAX_CONTENT_SIZE)
 			throw new ContentException("邮件内容过长");
 		return true;
 	}

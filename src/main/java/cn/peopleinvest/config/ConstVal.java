@@ -1,5 +1,8 @@
 package cn.peopleinvest.config;
 
+/**
+ * 投榜网所用参数
+ */
 public class ConstVal {
     public static final String ONLINE_USER = "onlineUser";
     public static final String INPUT = "input";

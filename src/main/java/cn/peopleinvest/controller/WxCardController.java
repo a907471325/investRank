@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.util.HashMap;
 
+/**
+ * 微信小程序名片控制器
+ */
 @RestController
 @RequestMapping(value = "/card")
 public class WxCardController {
@@ -19,6 +22,12 @@ public class WxCardController {
     @Autowired
     private WxCardDaoImpl wxCardDao;
 
+    /**
+     * 根据用户ID获取名片
+     * @param token
+     * @return
+     * @throws IOException
+     */
     @GetMapping(value = "/id")
     public String getCard(@RequestHeader("token") String token) throws IOException {
         JSONObject jo = new JSONObject();
@@ -26,6 +35,12 @@ public class WxCardController {
         return ObjectMapperWoker.getInstance().writeValueAsString(jo);
     }
 
+    /**
+     * 根据卡片ID获取名片
+     * @param id
+     * @return
+     * @throws IOException
+     */
     @GetMapping(value = "/cardId")
     public String getCardFromId(@RequestHeader("token") String id) throws IOException {
         JSONObject jo = new JSONObject();
@@ -33,6 +48,13 @@ public class WxCardController {
         return ObjectMapperWoker.getInstance().writeValueAsString(jo);
     }
 
+    /**
+     * 添加新名片
+     * @param token
+     * @param data
+     * @return
+     * @throws IOException
+     */
     @PostMapping(value = "/card")
     public String addCard(@RequestHeader("token") String token, @RequestBody WxCard data) throws IOException {
         JSONObject jo = new JSONObject();
@@ -42,6 +64,13 @@ public class WxCardController {
         return ObjectMapperWoker.getInstance().writeValueAsString(jo);
     }
 
+    /**
+     * 删除名片
+     * @param token
+     * @param id
+     * @return
+     * @throws IOException
+     */
     @DeleteMapping(value = "/card/{id}")
     public String delCard(@RequestHeader("token") String token,@PathVariable String id) throws IOException {
         JSONObject jo = new JSONObject();

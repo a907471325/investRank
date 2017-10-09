@@ -2,8 +2,9 @@ package cn.peopleinvest.config;
 
 import java.io.InputStream;
 import java.util.Properties;
+
 //sendcloud邮件发送api参数
-public class Config {
+public class MailConfig {
 
 	public static final String CHARSET = "utf-8";
 	public static String server = "http://www.sendcloud.net";
@@ -32,7 +33,7 @@ public class Config {
 
 	static {
 		try {
-			InputStream f = Config.class.getClassLoader().getResourceAsStream("config.properties");
+			InputStream f = MailConfig.class.getClassLoader().getResourceAsStream("config.properties");
 			Properties pros = new Properties();
 			pros.load(f);
 			send_api = pros.getProperty("send_api");
